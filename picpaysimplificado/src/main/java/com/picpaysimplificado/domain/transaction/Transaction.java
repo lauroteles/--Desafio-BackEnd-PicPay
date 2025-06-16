@@ -1,13 +1,11 @@
-package com.picpaysimplificado.domain.user;
+package com.picpaysimplificado.domain.transaction;
 
+import com.picpaysimplificado.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.metamodel.mapping.NonAggregatedIdentifierMapping;
-import org.springframework.boot.autoconfigure.web.WebProperties;
-import org.springframework.transaction.reactive.GenericReactiveTransaction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
