@@ -27,7 +27,10 @@ public class TransactionService {
         @Autowired
         private RestTemplate restTemplate;
 
-        public void createTransaction(TransacationDTO transaction) throws Exception{
+        @Autowired
+        private NotificationService notificationService;
+
+        public Transaction createTransaction(TransacationDTO transaction) throws Exception{
                 User sender = this.userService.findUserById(transaction.senderId());
                 User receiver = this.userService.findUserById(transaction.receiverId());
 
@@ -51,6 +54,10 @@ public class TransactionService {
                 userService.saveUser(sender);
                 userService.saveUser(receiver);
 
+                this.notificationService.sendNotification(sender,"Transação realizada com sucesso");
+
+                this.notificationService.sendNotification(receiver,"Transação realizada com sucesso");
+
                 return newTransaction;
 
 
@@ -60,7 +67,7 @@ public class TransactionService {
                 if (autorizationResponse.getStatusCode()== HttpStatus.OK ){
                         String message = (String) autorizationResponse.getBody().get("message");
                         return "Autorizado".equalsIgnoreCase(message);
-                }else  return false;
+                } else  return false;
         }
 
 }
